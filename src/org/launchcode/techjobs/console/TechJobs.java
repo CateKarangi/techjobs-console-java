@@ -1,8 +1,6 @@
 package org.launchcode.techjobs.console;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -61,7 +59,8 @@ public class TechJobs {
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not yet implemented.");
+                    printJobs(JobData.findByValue(searchTerm));
+//                    System.out.println("Search all fields not yet implemented.");
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
@@ -108,9 +107,22 @@ public class TechJobs {
         return choiceKeys[choiceIdx];
     }
 
+
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
-        System.out.println("printJobs is not implemented yet");
+        if(someJobs.size() > 0) {
+            for(HashMap<String, String> jobDesc : someJobs){
+                System.out.println("*****");
+                SortedSet<String> keySet = new TreeSet<>(jobDesc.keySet());
+                for(String key : keySet){
+                    System.out.println(key+": "+jobDesc.get(key));
+                }
+                System.out.println("*****\n\n");
+            }
+        }else{
+            System.out.println("There are no jobs available.");
+        }
+
     }
 }
