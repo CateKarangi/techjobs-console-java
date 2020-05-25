@@ -77,7 +77,7 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            if (aValue != null && (aValue.contains(value) || aValue.equalsIgnoreCase(value))) {
                 jobs.add(row);
             }
         }
@@ -150,6 +150,6 @@ public class JobData {
             System.out.println("Failed to load job data");
             e.printStackTrace();
         }
-    }
 
+    }
 }
